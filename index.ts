@@ -1,19 +1,18 @@
-import express from 'express';
-import loginRouter from './controllers/login';
-import commentsRouter from './controllers/comments';
-import postsRouter from './controllers/posts';
-import usersRouter from './controllers/users';
+import app from './app';
+import { PORT } from './utils/config';
+import { connectToDatabase } from './utils/db';
 
-const app = express();
-app.use(express.json());
 
-const PORT = 3000;
+const start = async () => {
+    try {
+        await connectToDatabase();
+        app.listen(PORT, () => {
+            console.log(`Server running on PORT ${PORT}`);
+        });
+    } catch (error) {
+        return process.exit(1);
+    }
+};
 
-app.use('/login', loginRouter);
-app.use('/comments', commentsRouter);
-app.use('/posts', postsRouter);
-app.use('/users', usersRouter);
 
-app.listen(PORT, () => {
-    console.log(`Server running on PORT ${PORT}`);
-});
+ void start();
