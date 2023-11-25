@@ -6,10 +6,12 @@ import { connectToDatabase } from './utils/db';
 const start = async () => {
     try {
         await connectToDatabase();
+
         app.listen(PORT, () => {
             console.log(`Server running on PORT ${PORT}`);
         });
     } catch (error) {
+        console.log(error);
         return process.exit(1);
     }
 };

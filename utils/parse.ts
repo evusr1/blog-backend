@@ -3,7 +3,7 @@ const isString = (text: unknown): text is string => {
 };
 
 const isNumber = (number: unknown): number is number => {
-    return typeof number == 'number' || number instanceof Number;
+    return typeof number == 'number' || !isNaN(Number(number));
 };
 
 const toString = (text: unknown): string => {
